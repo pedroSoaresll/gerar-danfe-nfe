@@ -1,6 +1,7 @@
 const cluster = require('cluster');
 const http = require('http');
 const numCPUs = require('os').cpus().length;
+var cors = require('cors');
 var express = require('express');
 var request = require('request');
 var app = express();
@@ -20,6 +21,9 @@ if (cluster.isMaster) {
   });
 
 } else {
+
+	app.use(cors());
+	app.options('*', cors());
   
   /**
 	 * 
